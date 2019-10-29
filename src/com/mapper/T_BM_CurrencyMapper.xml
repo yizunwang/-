@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.T_BM_CurrencyMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.T_BM_Currency" >
+    <id column="Curreny_ID" property="currenyId" jdbcType="INTEGER" />
+    <result column="Currency_No" property="currencyNo" jdbcType="VARCHAR" />
+    <result column="Currency_Name" property="currencyName" jdbcType="VARCHAR" />
+    <result column="Is_Valid" property="isValid" jdbcType="CHAR" />
+    <result column="Create_User" property="createUser" jdbcType="VARCHAR" />
+    <result column="Create_Date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="Update_User" property="updateUser" jdbcType="VARCHAR" />
+    <result column="Update_Date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Curreny_ID, Currency_No, Currency_Name, Is_Valid, Create_User, Create_Date, Update_User, 
+    Update_Date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BM_Currency
+    where Curreny_ID = #{currenyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_BM_Currency
+    where Curreny_ID = #{currenyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.T_BM_Currency" >
+    insert into T_BM_Currency (Curreny_ID, Currency_No, Currency_Name, 
+      Is_Valid, Create_User, Create_Date, 
+      Update_User, Update_Date)
+    values (#{currenyId,jdbcType=INTEGER}, #{currencyNo,jdbcType=VARCHAR}, #{currencyName,jdbcType=VARCHAR}, 
+      #{isValid,jdbcType=CHAR}, #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.T_BM_Currency" >
+    insert into T_BM_Currency
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="currenyId != null" >
+        Curreny_ID,
+      </if>
+      <if test="currencyNo != null" >
+        Currency_No,
+      </if>
+      <if test="currencyName != null" >
+        Currency_Name,
+      </if>
+      <if test="isValid != null" >
+        Is_Valid,
+      </if>
+      <if test="createUser != null" >
+        Create_User,
+      </if>
+      <if test="createDate != null" >
+        Create_Date,
+      </if>
+      <if test="updateUser != null" >
+        Update_User,
+      </if>
+      <if test="updateDate != null" >
+        Update_Date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="currenyId != null" >
+        #{currenyId,jdbcType=INTEGER},
+      </if>
+      <if test="currencyNo != null" >
+        #{currencyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyName != null" >
+        #{currencyName,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.T_BM_Currency" >
+    update T_BM_Currency
+    <set >
+      <if test="currencyNo != null" >
+        Currency_No = #{currencyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyName != null" >
+        Currency_Name = #{currencyName,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        Is_Valid = #{isValid,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        Create_User = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        Update_User = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        Update_Date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Curreny_ID = #{currenyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.T_BM_Currency" >
+    update T_BM_Currency
+    set Currency_No = #{currencyNo,jdbcType=VARCHAR},
+      Currency_Name = #{currencyName,jdbcType=VARCHAR},
+      Is_Valid = #{isValid,jdbcType=CHAR},
+      Create_User = #{createUser,jdbcType=VARCHAR},
+      Create_Date = #{createDate,jdbcType=TIMESTAMP},
+      Update_User = #{updateUser,jdbcType=VARCHAR},
+      Update_Date = #{updateDate,jdbcType=TIMESTAMP}
+    where Curreny_ID = #{currenyId,jdbcType=INTEGER}
+  </update>
+</mapper>

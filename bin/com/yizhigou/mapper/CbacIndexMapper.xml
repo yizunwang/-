@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yizhigou.mapper.CbacIndexMapper" >
+  <resultMap id="BaseResultMap" type="com.yizhigou.pojo.CbacIndex" >
+    <id column="index_id" property="indexId" jdbcType="INTEGER" />
+    <id column="index_first_title" property="indexFirstTitle" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="index_content" property="indexContent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    index_id, index_first_title, product_id, index_content
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yizhigou.pojo.CbacIndexExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cbac_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yizhigou.pojo.CbacIndexKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from cbac_index
+    where index_id = #{indexId,jdbcType=INTEGER}
+      and index_first_title = #{indexFirstTitle,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yizhigou.pojo.CbacIndexKey" >
+    delete from cbac_index
+    where index_id = #{indexId,jdbcType=INTEGER}
+      and index_first_title = #{indexFirstTitle,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yizhigou.pojo.CbacIndexExample" >
+    delete from cbac_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yizhigou.pojo.CbacIndex" >
+    insert into cbac_index (index_id, index_first_title, product_id, 
+      index_content)
+    values (#{indexId,jdbcType=INTEGER}, #{indexFirstTitle,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+      #{indexContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yizhigou.pojo.CbacIndex" >
+    insert into cbac_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="indexId != null" >
+        index_id,
+      </if>
+      <if test="indexFirstTitle != null" >
+        index_first_title,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="indexContent != null" >
+        index_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="indexId != null" >
+        #{indexId,jdbcType=INTEGER},
+      </if>
+      <if test="indexFirstTitle != null" >
+        #{indexFirstTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="indexContent != null" >
+        #{indexContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yizhigou.pojo.CbacIndexExample" resultType="java.lang.Integer" >
+    select count(*) from cbac_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cbac_index
+    <set >
+      <if test="record.indexId != null" >
+        index_id = #{record.indexId,jdbcType=INTEGER},
+      </if>
+      <if test="record.indexFirstTitle != null" >
+        index_first_title = #{record.indexFirstTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexContent != null" >
+        index_content = #{record.indexContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cbac_index
+    set index_id = #{record.indexId,jdbcType=INTEGER},
+      index_first_title = #{record.indexFirstTitle,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      index_content = #{record.indexContent,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yizhigou.pojo.CbacIndex" >
+    update cbac_index
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="indexContent != null" >
+        index_content = #{indexContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where index_id = #{indexId,jdbcType=INTEGER}
+      and index_first_title = #{indexFirstTitle,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yizhigou.pojo.CbacIndex" >
+    update cbac_index
+    set product_id = #{productId,jdbcType=VARCHAR},
+      index_content = #{indexContent,jdbcType=VARCHAR}
+    where index_id = #{indexId,jdbcType=INTEGER}
+      and index_first_title = #{indexFirstTitle,jdbcType=VARCHAR}
+  </update>
+</mapper>
